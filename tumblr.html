@@ -1,0 +1,199 @@
+<!--
+Copyright (C) 2013 Göktuğ Kayaalp <goktug.kayaalp@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<!doctype html>
+<html>
+    <head>
+        <title>{Title}</title>
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+<style type="text/css">
+blockquote { font-style: italic; }
+pre        { font-size:1.3em; overflow:auto; }
+#footer    { text-align:center; }
+#main      { max-width:700px; margin:auto; }
+#nav       { text-align:center; }
+#posts     { list-style-type:lower-greek; }
+.mono      { font-family:Monospace; }
+.post      { margin-bottom:3em; }
+.source    { display:block; text-align:right; }
+</style>
+    </head>
+    <body>
+	<div id="main">
+	  <h1 class="mono">#! {Title}</h1>
+
+          {block:Description}
+          <p id="description" class="mono"># {Description}</p>
+          {/block:Description}
+	  <hr/>
+	  <div id="nav">
+	    <a href="/">Home</a>
+	    {block:HasPages}
+	      {block:Pages}
+	    &nbsp;&ndash;&nbsp;
+	        <a href="{URL}">{Label}</a>
+              {/block:Pages}
+            {/block:HasPages}
+	    {block:SubmissionsEnabled}
+		 &nbsp;&ndash;&nbsp;
+	      <a href="/submit">{SubmitLabel}</a>
+            {/block:SubmissionsEnabled}
+	    {block:AskEnabled}
+	       &nbsp;&ndash;&nbsp;
+	      <a href="/ask">{AskLabel}</a>
+            {/block:AskEnabled}
+	       &nbsp;&ndash;&nbsp;
+	    <a href="{RSS}">Feed</a>
+	  </div>
+	  <hr/>
+
+          <ol id="posts">
+            {block:Posts}
+	            <div class="post text">
+                    <li class="post-body text">
+
+                {block:Text}
+		      <a href="{Permalink}">§</a>
+                        {block:Title}
+                            <h3 class="post heading">
+			      <a href="{Permalink}">{Title}</a>
+			    </h3>
+                        {/block:Title}
+
+		    {Body}
+                {/block:Text}
+
+                {block:Photo}
+		      <a href="{Permalink}">§</a>
+                        {block:Caption}
+                            <span class="caption">{Caption}</span>
+                        {/block:Caption}
+		    <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+                {/block:Photo}
+
+                {block:Panorama}
+		    <a href="{Permalink}">§</a>
+		    {block:Caption}
+		    <span class="caption">{Caption}</span>
+                    {/block:Caption}
+                    {LinkOpenTag}
+                    <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
+                    {LinkCloseTag}
+                {/block:Panorama}
+
+                {block:Photoset}
+		      <a href="{Permalink}">§</a>
+                        {block:Caption}
+                            <span class="caption">{Caption}</span>
+                        {/block:Caption}
+		    {Photoset-500}
+                {/block:Photoset}
+
+                {block:Quote}
+		    <a href="{Permalink}">§</a>&nbsp;
+                    «{Quote}»
+		    {block:Source}
+                      <span class="source">&mdash;&nbsp;{Source}</span>
+                    {/block:Source}
+                {/block:Quote}
+
+                {block:Link}
+		      <a href="{Permalink}">§</a>&nbsp;
+                        <a href="{URL}" class="link" {Target}>{Name}</a>
+                    {block:Description}
+                    <div class="description">{Description}</div>
+                    {/block:Description}
+                {/block:Link}
+
+                {block:Chat}
+		      <a href="{Permalink}">§</a>
+                        {block:Title}
+                            <h3><a href="{Permalink}">{Title}</a></h3>
+                        {/block:Title}
+                    <ul class="chat">
+                      {block:Lines}
+                      <li class="{Alt} user_{UserNumber}">
+                        {block:Label}
+                        <span class="label">{Label}</span>
+                        {/block:Label}
+                        {Line}
+                      </li>
+                      {/block:Lines}
+                    </ul>
+                {/block:Chat}
+
+                {block:Video}
+			<a href="{Permalink}">§</a>
+                        {block:Caption}
+                            <span class="caption">{Caption}</span>
+                        {/block:Caption}
+		    {Video-500}
+                {/block:Video}
+
+                {block:Audio}
+		      <a href="{Permalink}">§</a>
+                        {block:Caption}
+                            <span class="caption">{Caption}</span>
+                        {/block:Caption}
+		    {AudioPlayerBlack}
+                {/block:Audio}
+
+		    <hr/>
+		    {block:NoteCount}<span class="meta">
+			{lang:Notes}:
+			<span class="notecount">{NoteCount}</span>
+		    </span>&nbsp;&ndash;&nbsp;{/block:NoteCount}
+		    {block:RebloggedFrom}<span class="reblog">
+			{lang:Reblogged from ReblogParentName 2}
+		    </span>&nbsp;&ndash;&nbsp;{/block:RebloggedFrom}
+		    {block:HasTags}<span class="tags">
+			{lang:Tags}:
+			{block:Tags}&nbsp;(<a href="{TagURL}">{Tag}</a>)&nbsp;{/block:Tags}
+		    </span>{/block:HasTags}
+                    </div>
+		    
+            {/block:Posts}
+        </ol>
+          {block:PermalinkPage}
+            {PostNotes}
+          {block:PermalinkPage}
+	<p id="footer">
+          {block:PreviousPage}
+          <a href="{PreviousPage}">&#171;&nbsp;</a>
+          {/block:PreviousPage}
+
+          {block:NextPage}
+          <a href="{NextPage}">&nbsp;&#187;</a>
+          {/block:NextPage}
+        </p>
+	<hr/>
+	<blockquote id="copyright">
+	  Powered by <a href="http://www.tumblr.com">Tumblr</a>.
+	</blockquote>
+        <hr/>
+	</div>
+
+    </body>
+</html>
