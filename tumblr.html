@@ -25,78 +25,183 @@ THE SOFTWARE.
         <title>{Title}</title>
         <link rel="shortcut icon" href="{Favicon}">
         <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        <link href='http://fonts.googleapis.com/css?family=Caudex|Judson&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         {block:Description}
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
 <style type="text/css">
-blockquote { font-style: italic; }
-pre        { font-size:1.3em; overflow:auto; }
-#footer    { text-align:center; }
-#main      { max-width:700px; margin:auto; }
-#nav       { text-align:center; }
-#posts     { list-style-type:lower-greek; }
-.mono      { font-family:Monospace; }
-.post      { margin-bottom:3em; }
-.source    { display:block; text-align:right; }
-</style>
-    </head>
-    <body>
-	<div id="main">
-	  <h1 class="mono">#! {Title}</h1>
+/* Use Judson for titles and Caudex for text */
+body {
+    background: rgb(250, 240, 206);
+    font: 15pt normal Serif;
+    font-family: "Caudex", Serif;
+}
 
-          {block:Description}
-          <p id="description" class="mono"># {Description}</p>
-          {/block:Description}
-	  <hr/>
-	  <div id="nav">
-	    <a href="/">Home</a>
-	    {block:HasPages}
-	      {block:Pages}
-	    &nbsp;&ndash;&nbsp;
-	        <a href="{URL}">{Label}</a>
+header, header h1 {
+    text-align: center !important;
+}
+
+h1, h2, h3, h4, h5 {
+    text-align: right;
+    font-family: "Judson", Serif !important;
+    font-weight: normal;
+    text-align: left !important;
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-variant: small-caps;
+    text-decoration: overline;
+    letter-spacing: .3em;
+    padding-bottom: .3em;
+    border-bottom: 1px dashed black;
+}
+
+header p {
+    margin: .3em 0px;
+    letter-spacing: .001em;
+}
+
+div#main {
+    width: 60%;
+    margin-left: 20%;
+}
+
+a, a:visited, a:hover, a:active {
+    color: #0087af;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ol#posts {
+    list-style-type: none;
+}
+
+div#nav {
+    text-align: center;
+    font: .5em normal;
+    margin: 20pt 0px;
+    margin-bottom: 40pt;
+}
+
+.post {
+    border-bottom: 1px dotted #dbdbdb;
+    margin-bottom: 250px !important;
+}
+
+.post p, .post blockquote {
+    text-align: justify;
+    font-size: 14pt !important;
+}
+
+.post img {
+    width: 60%;
+    margin-left: 15%;
+}
+
+blockquote {
+    font-style: normal !important;
+}
+
+.post pre {
+    text-align: left;
+    letter-spacing: -0.02em;
+}
+
+.post footer {
+    text-align: left;
+}
+
+.tags {
+    margin-top: 10px;
+}
+
+.tag, .tag:before, .reblog {
+    font-style: italic;
+    font-size: .9em;
+    color: gray !important;
+}
+
+.reblog a {
+    font-style: normal;
+}
+
+.reblog a:after, .tumblr_blog:after {
+    content: "\2197";
+}
+
+.tag:before {
+    content: "\266f"; /* musical sharp sign */
+    color: black !important;
+    font-style: normal;
+}
+
+/* FUCK IE */
+.tag:not(:last-child):after {
+    content: ",";
+    color: black !important;
+    font-style: normal;
+}
+
+</style>
+</head>
+<body>
+    <div id="main">
+        <header>
+            <h1>{Title}</h1>
+            {block:Description}
+            <p id="description">{Description}</p>
+              {/block:Description}
+        </header>
+     <div id="nav">
+        <a href="/">Home</a>
+        {block:HasPages}
+          {block:Pages}
+        &nbsp;&ndash;&nbsp;
+            <a href="{URL}">{Label}</a>
               {/block:Pages}
             {/block:HasPages}
-	    {block:SubmissionsEnabled}
-		 &nbsp;&ndash;&nbsp;
-	      <a href="/submit">{SubmitLabel}</a>
+        {block:SubmissionsEnabled}
+         &nbsp;&ndash;&nbsp;
+          <a href="/submit">{SubmitLabel}</a>
             {/block:SubmissionsEnabled}
-	    {block:AskEnabled}
-	       &nbsp;&ndash;&nbsp;
-	      <a href="/ask">{AskLabel}</a>
+        {block:AskEnabled}
+           &nbsp;&ndash;&nbsp;
+          <a href="/ask">{AskLabel}</a>
             {/block:AskEnabled}
-	       &nbsp;&ndash;&nbsp;
-	    <a href="{RSS}">Feed</a>
-	  </div>
-	  <hr/>
+           &nbsp;&ndash;&nbsp;
+        <a href="{RSS}">Feed</a>
+      </div>
 
           <ol id="posts">
             {block:Posts}
-	            <div class="post text">
+                <div class="post text">
                     <li class="post-body text">
 
                 {block:Text}
-		      <a href="{Permalink}">§</a>
                         {block:Title}
-                            <h3 class="post heading">
-			      <a href="{Permalink}">{Title}</a>
-			    </h3>
+                            <h3 class="heading">
+                  <a href="{Permalink}">{Title}</a>
+                </h3>
                         {/block:Title}
 
-		    {Body}
+            {Body}
                 {/block:Text}
 
                 {block:Photo}
-		      <a href="{Permalink}">§</a>
                         {block:Caption}
                             <span class="caption">{Caption}</span>
                         {/block:Caption}
-		    <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+            <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
                 {/block:Photo}
 
                 {block:Panorama}
-		    <a href="{Permalink}">§</a>
-		    {block:Caption}
-		    <span class="caption">{Caption}</span>
+            <a href="{Permalink}">§</a>
+            {block:Caption}
+            <span class="caption">{Caption}</span>
                     {/block:Caption}
                     {LinkOpenTag}
                     <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
@@ -104,23 +209,20 @@ pre        { font-size:1.3em; overflow:auto; }
                 {/block:Panorama}
 
                 {block:Photoset}
-		      <a href="{Permalink}">§</a>
                         {block:Caption}
                             <span class="caption">{Caption}</span>
                         {/block:Caption}
-		    {Photoset-500}
+            {Photoset-500}
                 {/block:Photoset}
 
                 {block:Quote}
-		    <a href="{Permalink}">§</a>&nbsp;
                     «{Quote}»
-		    {block:Source}
+            {block:Source}
                       <span class="source">&mdash;&nbsp;{Source}</span>
                     {/block:Source}
                 {/block:Quote}
 
                 {block:Link}
-		      <a href="{Permalink}">§</a>&nbsp;
                         <a href="{URL}" class="link" {Target}>{Name}</a>
                     {block:Description}
                     <div class="description">{Description}</div>
@@ -128,7 +230,6 @@ pre        { font-size:1.3em; overflow:auto; }
                 {/block:Link}
 
                 {block:Chat}
-		      <a href="{Permalink}">§</a>
                         {block:Title}
                             <h3><a href="{Permalink}">{Title}</a></h3>
                         {/block:Title}
@@ -145,41 +246,30 @@ pre        { font-size:1.3em; overflow:auto; }
                 {/block:Chat}
 
                 {block:Video}
-			<a href="{Permalink}">§</a>
                         {block:Caption}
                             <span class="caption">{Caption}</span>
                         {/block:Caption}
-		    {Video-500}
+            {Video-500}
                 {/block:Video}
 
                 {block:Audio}
-		      <a href="{Permalink}">§</a>
                         {block:Caption}
                             <span class="caption">{Caption}</span>
                         {/block:Caption}
-		    {AudioPlayerBlack}
+            {AudioPlayerBlack}
                 {/block:Audio}
-
-		    <hr/>
-		    {block:NoteCount}<span class="meta">
-			{lang:Notes}:
-			<span class="notecount">{NoteCount}</span>
-		    </span>&nbsp;&ndash;&nbsp;{/block:NoteCount}
-		    {block:RebloggedFrom}<span class="reblog">
-			{lang:Reblogged from ReblogParentName 2}
-		    </span>&nbsp;&ndash;&nbsp;{/block:RebloggedFrom}
-		    {block:HasTags}<span class="tags">
-			{lang:Tags}:
-			{block:Tags}&nbsp;(<a href="{TagURL}">{Tag}</a>)&nbsp;{/block:Tags}
-		    </span>{/block:HasTags}
+            <div class="tags">
+            <p>{block:RebloggedFrom}<span class="reblog">{lang:Reblogged from ReblogParentName 2}.</span>{/block:RebloggedFrom}</p>
+            <p>{block:HasTags}<span class="tags">{block:Tags}<a class="tag" href="{TagURL}">{Tag}</a>&nbsp;{/block:Tags}</span>{/block:HasTags}</p>
+            </div>
                     </div>
-		    
+            
             {/block:Posts}
         </ol>
           {block:PermalinkPage}
             {PostNotes}
           {block:PermalinkPage}
-	<p id="footer">
+    <p id="footer">
           {block:PreviousPage}
           <a href="{PreviousPage}">&#171;&nbsp;</a>
           {/block:PreviousPage}
@@ -188,12 +278,10 @@ pre        { font-size:1.3em; overflow:auto; }
           <a href="{NextPage}">&nbsp;&#187;</a>
           {/block:NextPage}
         </p>
-	<hr/>
-	<blockquote id="copyright">
-	  Powered by <a href="http://www.tumblr.com">Tumblr</a>.
-	</blockquote>
-        <hr/>
-	</div>
+    <blockquote id="copyright">
+      Powered by <a href="http://www.tumblr.com">Tumblr</a>.
+    </blockquote>
+    </div>
 
     </body>
 </html>
