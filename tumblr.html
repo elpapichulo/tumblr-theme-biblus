@@ -106,6 +106,10 @@ blockquote {
     font-style: normal !important;
 }
 
+.quote-source {
+    text-align: right !important;
+}
+
 .post pre {
     text-align: left;
     letter-spacing: -0.02em;
@@ -145,7 +149,6 @@ blockquote {
     color: black !important;
     font-style: normal;
 }
-
 </style>
 </head>
 <body>
@@ -218,7 +221,7 @@ blockquote {
                 {block:Quote}
                     «{Quote}»
             {block:Source}
-                      <span class="source">&mdash;&nbsp;{Source}</span>
+                      <p class="quote-source">&mdash;&nbsp;{Source}</p>
                     {/block:Source}
                 {/block:Quote}
 
