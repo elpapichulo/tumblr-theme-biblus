@@ -119,6 +119,11 @@ blockquote {
     text-align: left;
 }
 
+.post-permalink, .post-permalink:hover {
+    color: gray;
+    text-decoration: none;
+}
+
 .tags {
     margin-top: 10px;
 }
@@ -263,7 +268,10 @@ blockquote {
                 {/block:Audio}
             <div class="tags">
             <p>{block:RebloggedFrom}<span class="reblog">{lang:Reblogged from ReblogParentName 2}.</span>{/block:RebloggedFrom}</p>
-            <p>{block:HasTags}<span class="tags">{block:Tags}<a class="tag" href="{TagURL}">{Tag}</a>&nbsp;{/block:Tags}</span>{/block:HasTags}</p>
+            <p>
+                <a href="{Permalink}" class="post-permalink" title="Permalink">&infin;</a>
+                {block:HasTags}<span class="tags">{block:Tags}<a class="tag" href="{TagURL}">{Tag}</a>&nbsp;{/block:Tags}</span>{/block:HasTags}
+            </p>
             </div>
                     </div>
             
@@ -274,11 +282,11 @@ blockquote {
           {block:PermalinkPage}
     <p id="footer">
           {block:PreviousPage}
-          <a href="{PreviousPage}">&#171;&nbsp;</a>
+          <a href="{PreviousPage}">&larr;</a>
           {/block:PreviousPage}
 
           {block:NextPage}
-          <a href="{NextPage}">&nbsp;&#187;</a>
+          <a href="{NextPage}">&rarr;</a>
           {/block:NextPage}
         </p>
     <blockquote id="copyright">
